@@ -21,6 +21,7 @@ export class AddCarComponent implements OnInit {
     workerId:'',
   };
   advisors: Advisor[] = [];
+  popupService: any;
 
   constructor(private carService: CarService, private toastr: ToastrService, private PopupService:PopupService) {}
 
@@ -74,4 +75,9 @@ export class AddCarComponent implements OnInit {
       workerId: '',
     };
   }
+
+  cancel(){
+    this.PopupService.hide();
+  }
 }
+

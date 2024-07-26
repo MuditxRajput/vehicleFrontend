@@ -26,6 +26,10 @@ export class LoginComponent {
         response => {
           console.log('User logged in successfully:', response);
           this.toastr.success('Logged in successfully');
+
+          if (response.token) {
+            localStorage.setItem('JwtToken', response.token);
+          }
           // Handle success response
           if (response.role === 'admin') {
             this.router.navigate(['/admin']); // Redirect to admin dashboard

@@ -71,6 +71,9 @@ export class AdminComponent implements OnInit {
       }
     )
   }
+  editVehicle(vehicle: any) {
+    this.popupService.show(vehicle);
+  }
 ngOnInit():void{
   this.fetchAllVehicle();
 }

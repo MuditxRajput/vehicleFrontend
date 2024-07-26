@@ -4,18 +4,24 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PopupService {
-
   private visible = false;
+  private vehicleData: any = null;
 
-  show() {
+  show(vehicle: any = null) {
+    this.vehicleData = vehicle;
     this.visible = true;
   }
 
   hide() {
     this.visible = false;
+    this.vehicleData = null;
   }
 
   isVisible(): boolean {
     return this.visible;
+  }
+
+  getVehicleData(): any {
+    return this.vehicleData;
   }
 }

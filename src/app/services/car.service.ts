@@ -1,7 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+// import { AdvisorsResponse } from '../interfaces/AdvisorsResponse';
 import { AdvisorsResponse } from '../interfaces/AdvisorsResponse ';
 import { Car } from '../interfaces/car';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,32 +13,39 @@ export class CarService {
   private deleteVehicle = 'https://localhost:7053/api/Vehicle/deleteVehicle';
   private advisorApiUrl = 'https://localhost:7053/api/advisor/getAdvisor';
   private getAllCar = 'https://localhost:7053/api/Vehicle/allVehicle';
-  private getAdvisorById = 'https://localhost:7053/api/advisor/getAdvisorById'
+  private getAdvisorById = 'https://localhost:7053/api/advisor/getAdvisorById';
+
   constructor(private http: HttpClient) {}
-  getCars() {
-    return this.http.get<Car[]>(this.apiUrl);
+
+  private getHeaders() {
+    const token = localStorage.getItem('JwtToken');
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
   }
 
-  addCar(car: Car) {
-   // we need to hit the add vehicle api 
-   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<any>(this.apiUrl, car, { headers });
+  getCars(): Observable<Car[]> {
+    return this.http.get<Car[]>(this.apiUrl, { headers: this.getHeaders() });
   }
-  getAdvisors() {
-    return this.http.get<AdvisorsResponse>(this.advisorApiUrl);
+
+  addCar(car: Car): Observable<any> {
+    return this.http.post<any>(this.apiUrl, car, { headers: this.getHeaders() });
   }
-  getAllVehicle()
-  {
-    return this.http.get<any>(this.getAllCar);
+
+  getAdvisors(): Observable<AdvisorsResponse> {
+    return this.http.get<AdvisorsResponse>(this.advisorApiUrl, { headers: this.getHeaders() });
   }
-  getWokerName(id:any){
-    return this.http.get<any>( `${this.getAdvisorById}?id=${id}`)
+
+  getAllVehicle(): Observable<any> {
+    return this.http.get<any>(this.getAllCar, { headers: this.getHeaders() });
   }
-  deleteVehicleById(id:any)
-  {
-    return this.http.delete<any>(`${this.deleteVehicle}?id=${id}`)
+
+  getWokerName(id: any): Observable<any> {
+    return this.http.get<any>(`${this.getAdvisorById}?id=${id}`, { headers: this.getHeaders() });
   }
- 
+
+  deleteVehicleById(id: any): Observable<any> {
+    return this.http.delete<any>(`${this.deleteVehicle}?id=${id}`, { headers: this.getHeaders() });
+  }
 }
-
-
