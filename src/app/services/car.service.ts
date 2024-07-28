@@ -14,7 +14,9 @@ export class CarService {
   private advisorApiUrl = 'https://localhost:7053/api/advisor/getAdvisor';
   private getAllCar = 'https://localhost:7053/api/Vehicle/allVehicle';
   private getAdvisorById = 'https://localhost:7053/api/advisor/getAdvisorById';
-
+  private baseUrl = 'https://localhost:7053/api';
+  private VehicleById = 'https://localhost:7053/api/Vehicle/getVehicleById';
+  private getWorkItemByIdUrl = 'https://localhost:7053/api/WorkItem/getWorkItembyId';
   constructor(private http: HttpClient) {}
 
   private getHeaders() {
@@ -41,11 +43,22 @@ export class CarService {
     return this.http.get<any>(this.getAllCar, { headers: this.getHeaders() });
   }
 
-  getWokerName(id: any): Observable<any> {
+  getWorkerName(id: any): Observable<any> {
     return this.http.get<any>(`${this.getAdvisorById}?id=${id}`, { headers: this.getHeaders() });
   }
 
   deleteVehicleById(id: any): Observable<any> {
     return this.http.delete<any>(`${this.deleteVehicle}?id=${id}`, { headers: this.getHeaders() });
+  }
+
+  getFullDetail(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/Service/getFullDetail`, { headers: this.getHeaders() });
+  }
+
+  getVehicleById(id: any): Observable<any> {
+    return this.http.get<any>(`${this.VehicleById}?id=${id}`, { headers: this.getHeaders() });
+  }
+  getWorkItemById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.getWorkItemByIdUrl}?id=${id}`, { headers: this.getHeaders() });
   }
 }
