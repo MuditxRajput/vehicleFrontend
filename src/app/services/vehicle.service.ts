@@ -9,8 +9,8 @@ import { Registration } from '../interfaces/registration';
   providedIn: 'root'
 })
 export class VehicleService {
-  private registerUrl = 'https://localhost:7053/api/User/register';
-  private loginUrl = 'https://localhost:7053/api/User/login';
+  private registerUrl = 'https://vechicalmanagement20240729225353.azurewebsites.net/api/User/register';
+  private loginUrl = 'https://vechicalmanagement20240729225353.azurewebsites.net/api/User/login';
 
   constructor(private http: HttpClient) {}
 

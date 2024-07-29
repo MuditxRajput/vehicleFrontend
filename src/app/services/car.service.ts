@@ -9,14 +9,14 @@ import { Car } from '../interfaces/car';
   providedIn: 'root'
 })
 export class CarService {
-  private apiUrl = 'https://localhost:7053/api/Vehicle/addVehicle';
-  private deleteVehicle = 'https://localhost:7053/api/Vehicle/deleteVehicle';
-  private advisorApiUrl = 'https://localhost:7053/api/advisor/getAdvisor';
-  private getAllCar = 'https://localhost:7053/api/Vehicle/allVehicle';
-  private getAdvisorById = 'https://localhost:7053/api/advisor/getAdvisorById';
-  private baseUrl = 'https://localhost:7053/api';
-  private VehicleById = 'https://localhost:7053/api/Vehicle/getVehicleById';
-  private getWorkItemByIdUrl = 'https://localhost:7053/api/WorkItem/getWorkItembyId';
+  private apiUrl = 'https://vechicalmanagement20240729225353.azurewebsites.net/api/Vehicle/addVehicle';
+  private deleteVehicle = 'https://vechicalmanagement20240729225353.azurewebsites.net/api/Vehicle/deleteVehicle';
+  private advisorApiUrl = 'https://vechicalmanagement20240729225353.azurewebsites.net/api/advisor/getAdvisor';
+  private getAllCar = 'https://vechicalmanagement20240729225353.azurewebsites.net/api/Vehicle/allVehicle';
+  private getAdvisorById = 'https://vechicalmanagement20240729225353.azurewebsites.net/api/advisor/getAdvisorById';
+  private baseUrl = 'https://vechicalmanagement20240729225353.azurewebsites.net/api';
+  private VehicleById = 'https://vechicalmanagement20240729225353.azurewebsites.net/api/Vehicle/getVehicleById';
+  private getWorkItemByIdUrl = 'https://vechicalmanagement20240729225353.azurewebsites.net/api/WorkItem/getWorkItembyId';
   constructor(private http: HttpClient) {}
 
   private getHeaders() {

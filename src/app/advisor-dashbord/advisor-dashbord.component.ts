@@ -58,7 +58,7 @@ export class AdvisorDashbordComponent implements OnInit {
       price: this.calculateTotalPrice()
     };
 
-    this.http.post(`https://localhost:7053/api/Invoice/invoice?vehicleId=${vehicle.id}`, serviceRecord)
+    this.http.post(`https://vechicalmanagement20240729225353.azurewebsites.net/api/Invoice/invoice?vehicleId=${vehicle.id}`, serviceRecord)
       .subscribe(
         response => {
           console.log('Service record saved successfully:', response);
@@ -89,7 +89,7 @@ export class AdvisorDashbordComponent implements OnInit {
       items: selectedServices
     };
 
-    this.http.post(`https://localhost:7053/api/WorkItem/addWorkItem?vehicleId=${this.selectedVehicleId}`, workItem)
+    this.http.post(`https://vechicalmanagement20240729225353.azurewebsites.net/api/WorkItem/addWorkItem?vehicleId=${this.selectedVehicleId}`, workItem)
       .subscribe(
         response => {
           console.log('Work item saved successfully:', response);
