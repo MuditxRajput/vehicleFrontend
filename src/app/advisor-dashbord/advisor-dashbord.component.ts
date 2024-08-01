@@ -52,13 +52,12 @@ export class AdvisorDashbordComponent implements OnInit {
     if (!vehicle || !vehicle.id) return;
 
     const serviceRecord = {
-      // vehicleId: vehicle.id,
       vehicleName : vehicle.vehicleName,
       serviceDate: new Date(),
       workItemId: vehicle.workItemId,
       price: this.calculateTotalPrice()
     };
-
+    // https://vechicalmanagement20240729225353.azurewebsites.net/
     this.http.post(`https://vechicalmanagement20240729225353.azurewebsites.net/api/Invoice/invoice?vehicleId=${vehicle.id}`, serviceRecord)
       .subscribe(
         response => {
