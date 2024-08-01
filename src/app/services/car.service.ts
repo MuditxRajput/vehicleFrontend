@@ -17,6 +17,7 @@ export class CarService {
   private baseUrl = 'https://vechicalmanagement20240729225353.azurewebsites.net/api';
   private VehicleById = 'https://vechicalmanagement20240729225353.azurewebsites.net/api/Vehicle/getVehicleById';
   private getWorkItemByIdUrl = 'https://vechicalmanagement20240729225353.azurewebsites.net/api/WorkItem/getWorkItembyId';
+  private deleteVehicleFromService = 'https://vechicalmanagement20240729225353.azurewebsites.net/api/Service/deleteVehicle'
   constructor(private http: HttpClient) {}
 
   private getHeaders() {
@@ -50,6 +51,10 @@ export class CarService {
   deleteVehicleById(id: any): Observable<any> {
     return this.http.delete<any>(`${this.deleteVehicle}?id=${id}`, { headers: this.getHeaders() });
   }
+  deleteVehicleFromservice(id:any)
+  {
+    return this.http.delete<any>(`${this.deleteVehicleFromService}?id=${id}`,{headers:this.getHeaders()})
+  }
 
   getFullDetail(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/Service/getFullDetail`, { headers: this.getHeaders() });
@@ -58,6 +63,7 @@ export class CarService {
   getVehicleById(id: any): Observable<any> {
     return this.http.get<any>(`${this.VehicleById}?id=${id}`, { headers: this.getHeaders() });
   }
+
   getWorkItemById(id: number): Observable<any> {
     return this.http.get<any>(`${this.getWorkItemByIdUrl}?id=${id}`, { headers: this.getHeaders() });
   }

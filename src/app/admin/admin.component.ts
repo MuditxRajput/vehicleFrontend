@@ -80,14 +80,24 @@ export class AdminComponent implements OnInit {
     try {
       const res: any = await this.carService.getFullDetail().toPromise();
       const details = res.$values;
-      for (let data of details) {
-        data.vehicle = await this.fetchVehicleDetails(data.vehicleId);
-        data.workerName = await this.fetchWorkerName(data.vehicle.workerId);
-        const workItemDetails = await this.fetchWorkItemDetails(data.workItemId);
-        data.workItems = workItemDetails ? workItemDetails.items.$values : [];
+      console.log(details);
+      
+      if(details)
+      {
+        for (let data of details) {
+          // data.vehicle = await this.fetchVehicleDetails(data.vehicleId);
+          // if(data.vehicle.workerId){
+  
+          //   data.workerName = await this.fetchWorkerName(data.vehicle.workerId);
+          // }
+          // data.VehicleName = data.ve
+          const workItemDetails = await this.fetchWorkItemDetails(data.workItemId);
+          data.workItems = workItemDetails ? workItemDetails.items.$values : [];
+        }
+        this.fullDetails = details;
+        console.log("status->", this.fullDetails);
       }
-      this.fullDetails = details;
-      console.log("status->", this.fullDetails);
+      
     } catch (error) {
       console.error('Error fetching full details:', error);
     }
@@ -98,7 +108,10 @@ export class AdminComponent implements OnInit {
       async (res: any) => {
         const vehicles = res.$values;
         for (let vehicle of vehicles) {
-          vehicle.advisor = await this.fetchWorkerName(vehicle.workerId);
+          if(vehicle.workerId)
+          {
+            vehicle.advisor = await this.fetchWorkerName(vehicle.workerId);
+          }
           vehicle.serviceStartDate = this.formatTimestamp(vehicle.serviceStartDate);
         }
         this.allVehicles = vehicles;
@@ -115,10 +128,15 @@ export class AdminComponent implements OnInit {
   deleteVehicle(id: any) {
     this.carService.deleteVehicleById(id).subscribe(
       (res: any) => {
-        console.log(res);
         this.fetchAllVehicles();
       }
     );
+
+    this.carService.deleteVehicleFromservice(id).subscribe(
+      (res:any)=>{
+
+      }
+    )
   }
 
   editVehicle(vehicle: any) {

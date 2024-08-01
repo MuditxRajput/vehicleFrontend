@@ -18,7 +18,7 @@
   </div>
 
   <!-- Content Area -->
-  <div class="w-4/5 p-4">
+  <div class="w-4/5 p-4 bg-gray-100 overflow-y-auto">
     <!-- Vehicle List -->
     <div *ngIf="showVehicleList">
       <div *ngIf="allVehicles.length > 0">
@@ -41,16 +41,16 @@
               <td class="px-6 py-4 whitespace-nowrap">{{ vehicle.serviceStartDate }}</td>
               <td class="px-6 py-4 whitespace-nowrap">{{ vehicle.status }}</td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="flex gap-5 justify-center items-center">
-                  <button class="bg-green-500 px-2 py-1 rounded-md text-white" (click)="editVehicle(vehicle)">Edit</button>
-                  <button class="bg-red-500 px-2 py-1 rounded-md text-white" (click)="deleteVehicle(vehicle.id)">Delete</button>
+                <div class="flex gap-2 justify-center items-center">
+                  <button class="bg-green-500 px-2 py-1 rounded-md text-white hover:bg-green-600" (click)="editVehicle(vehicle)">Edit</button>
+                  <button class="bg-red-500 px-2 py-1 rounded-md text-white hover:bg-red-600" (click)="deleteVehicle(vehicle.id)">Delete</button>
                 </div>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div *ngIf="allVehicles.length === 0">
+      <div *ngIf="allVehicles.length === 0" class="text-center text-gray-500">
         <p>No vehicles found.</p>
       </div>
     </div>
@@ -62,21 +62,17 @@
           <thead class="bg-gray-50">
             <tr>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vehicle Name</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">VID</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service Date</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Advisor</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Work Items</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
             <tr *ngFor="let detail of fullDetails">
-              <td class="px-6 py-4 whitespace-nowrap">{{ detail.vehicle.vehicleName }}</td>
-              <td class="px-6 py-4 whitespace-nowrap">{{ detail.vehicle.plateNumber }}</td>
+              <td class="px-6 py-4 whitespace-nowrap">{{ detail.vehicleName }}</td>
               <td class="px-6 py-4 whitespace-nowrap">{{ detail.serviceDate | date }}</td>
-              <td class="px-6 py-4 whitespace-nowrap">{{ detail.workerName }}</td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <ul>
+                <ul class="list-disc list-inside">
                   <li *ngFor="let item of detail.workItems">{{ item }}</li>
                 </ul>
               </td>
@@ -85,7 +81,7 @@
           </tbody>
         </table>
       </div>
-      <div *ngIf="fullDetails.length === 0">
+      <div *ngIf="fullDetails.length === 0" class="text-center text-gray-500">
         <p>No services found.</p>
       </div>
     </div>
@@ -96,7 +92,7 @@
 
 <ng-template [ngIf]="popupService.isVisible()">
   <div class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg relative">
       <button class="absolute top-2 right-2 text-gray-700" (click)="popupService.hide()">X</button>
       <app-add-car></app-add-car>
     </div>

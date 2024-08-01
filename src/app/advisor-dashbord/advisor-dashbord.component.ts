@@ -52,7 +52,8 @@ export class AdvisorDashbordComponent implements OnInit {
     if (!vehicle || !vehicle.id) return;
 
     const serviceRecord = {
-      vehicleId: vehicle.id,
+      // vehicleId: vehicle.id,
+      vehicleName : vehicle.vehicleName,
       serviceDate: new Date(),
       workItemId: vehicle.workItemId,
       price: this.calculateTotalPrice()
